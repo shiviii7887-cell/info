@@ -98,6 +98,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="Markdown"
     )
 
+@require_join
 async def num_lookup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
         await update.message.reply_text("❌ Number daal!\nExample: `/num 9876543210`", parse_mode="Markdown")
@@ -111,64 +112,45 @@ async def num_lookup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = await update.message.reply_text("🔍 Fetching info...")
 
     try:
-        import asyncio
-        from playwright.async_api import async_playwright
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "application/json, text/plain, */*",
+            "Referer": "https://usersxinfo.page.gd/",
+        }
+        url = f"https://usersxinfo.page.gd/UsersXinfo?key=FREE_USER_001&num={number}"
 
-        async def fetch_with_browser():
-            async with async_playwright() as p:
-                browser = await p.chromium.launch(headless=True)
-                page = await browser.new_page()
-                await page.goto(
-                    f"https://usersxinfo.page.gd/UsersXinfo?key=FREE_USER_001&num={number}",
-                    wait_until="networkidle",
-                    timeout=30000
-                )
-                content = await page.content()
-                await browser.close()
-                return content
-
-        content = await fetch_with_browser()
+        async with httpx.AsyncClient(timeout=30, headers=headers, follow_redirects=True) as client:
+            resp = await client.get(url)
 
         import re
-        match = re.search(r'\{.*\}', content, re.DOTALL)
+        text_resp = resp.text
+        match = re.search(r'\{[\s\S]*\}', text_resp)
         if not match:
-            await msg.edit_text("❌ Data nahi mila!")
+            await msg.edit_text("❌ Data nahi mila! API ne response nahi diya.")
             return
 
         data = json.loads(match.group())
 
-        # Branding replace - sabhi keys
-        for key in list(data.keys()):
-            if any(x in key for x in ["developer", "support", "admin", "credit", "owner"]):
-                data[key] = "@ruchika_owns"
-
-        if "_security" in data:
-            data["_security"]["contact"] = "@ruchika_owns"
-
-        if "usage" in data:
-            for key in list(data["usage"].keys()):
-                if any(x in key for x in ["admin", "credit", "support"]):
-                    data["usage"][key] = "@ruchika_owns"
-
         def replace_branding(obj):
             if isinstance(obj, dict):
-                for k, v in obj.items():
+                for k in list(obj.keys()):
                     if any(x in k.lower() for x in ["developer", "support", "admin", "credit", "owner"]):
                         obj[k] = "@ruchika_owns"
                     else:
-                        replace_branding(v)
-
+                        replace_branding(obj[k])
             elif isinstance(obj, list):
                 for item in obj:
                     replace_branding(item)
-
         replace_branding(data)
 
-        await msg.edit_text(
-            f"<code>{json.dumps(data, indent=2, ensure_ascii=False)}</code>",
-            parse_mode="HTML"
-        )
+        result = json.dumps(data, indent=2, ensure_ascii=False)
+        if len(result) > 4000:
+            result = result[:4000] + "\n..."
 
+        await msg.edit_text(f"<code>{result}</code>", parse_mode="HTML")
+
+    except httpx.TimeoutException:
+        await msg.edit_text("⏳ Timeout! Thodi der baad try kar.")
     except Exception as e:
         import traceback; traceback.print_exc()
         await msg.edit_text(f"❌ Error: {e}")
