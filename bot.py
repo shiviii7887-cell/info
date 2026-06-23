@@ -306,7 +306,9 @@ async def ip_lookup(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def maintenance(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🛠️ Bot Under Maintenance\n\n"
-        "For any update related bot:\n"
+        "FREE All INFO NIKAL KE MISSUSE HO RAHA THA,:\n\n"
+        "AND BAHUT LOG INFO PE REPORT KAR RAHE THE...,:\n\n"
+        "SO, AB FREE INFO SIRF OWNER KE DM SE LELO"
         "contact owner @ruchika_owns"
     )
 
@@ -315,7 +317,7 @@ def main():
     app = ApplicationBuilder().token(BOT_TOKEN).request(request).build()
 
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("num", num_lookup))
+    app.add_handler(CommandHandler("num", maintenance))
     app.add_handler(CommandHandler("rc", maintenance))
     app.add_handler(CommandHandler("pin", maintenance))
     app.add_handler(CommandHandler("ifsc", maintenance))
