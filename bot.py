@@ -34,10 +34,10 @@ async def is_user_joined(bot, user_id):
         ch2 = mem2.status not in ['left', 'kicked']
         mem3 = await bot.get_chat_member(CH3_ID, user_id)
         ch3 = mem3.status not in ['left', 'kicked']
-        mem3 = await bot.get_chat_member(CH3_ID, user_id)
-        ch3 = mem3.status not in ['left', 'kicked']
-        mem3 = await bot.get_chat_member(CH3_ID, user_id)
-        ch3 = mem3.status not in ['left', 'kicked']
+        mem4 = await bot.get_chat_member(CH4_ID, user_id)
+        ch4 = mem4.status not in ['left', 'kicked']
+        mem5 = await bot.get_chat_member(CH5_ID, user_id)
+        ch5 = mem5.status not in ['left', 'kicked']
         return ch1 and ch2 and ch3 and ch4 and ch5
     except Exception as e:
         print(f"Join check error: {e}")
