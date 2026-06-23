@@ -15,16 +15,33 @@ IFSC_API    = "https://sbsakib.eu.cc/apis/ifsc_info?key=Demo&ifsc="
 IP_API      = "https://sbsakib.eu.cc/apis/ip_info?key=Demo&ip="
 CH1_ID      = os.getenv("CH1_ID", "")
 CH1_LINK    = os.getenv("CH1_LINK", "")
+CH2_ID      = os.getenv("CH2_ID", "")
+CH2_LINK    = os.getenv("CH2_LINK", "")
+CH3_ID      = os.getenv("CH3_ID", "")
+CH3_LINK    = os.getenv("CH3_LINK", "")
+CH4_ID      = os.getenv("CH4_ID", "")
+CH4_LINK    = os.getenv("CH4_LINK", "")
+CH5_ID      = os.getenv("CH5_ID", "")
+CH5_LINK    = os.getenv("CH5_LINK", "")
 
 # ── Join Check ───────────────────────────────────────────────────────────────
 
 async def is_user_joined(bot, user_id):
     try:
-        member = await bot.get_chat_member(CH1_ID, user_id)
-        return member.status not in ["left", "kicked"]
+        mem1 = await bot.get_chat_member(CH1_ID, user_id)
+        ch1 = mem1.status not in ['left', 'kicked']
+        mem2 = await bot.get_chat_member(CH2_ID, user_id)
+        ch2 = mem2.status not in ['left', 'kicked']
+        mem3 = await bot.get_chat_member(CH3_ID, user_id)
+        ch3 = mem3.status not in ['left', 'kicked']
+        mem3 = await bot.get_chat_member(CH3_ID, user_id)
+        ch3 = mem3.status not in ['left', 'kicked']
+        mem3 = await bot.get_chat_member(CH3_ID, user_id)
+        ch3 = mem3.status not in ['left', 'kicked']
+        return ch1 and ch2 and ch3 and ch4 and ch5
     except Exception as e:
         print(f"Join check error: {e}")
-        return False
+        return True
 
 def get_join_message(user_name):
     text = (
@@ -33,6 +50,10 @@ def get_join_message(user_name):
     )
     markup = InlineKeyboardMarkup([
         [InlineKeyboardButton("📢 Join Channel 1", url=CH1_LINK)],
+        [InlineKeyboardButton("📢 Join Channel 2", url=CH2_LINK)],
+        [InlineKeyboardButton("📢 Join Channel 3", url=CH3_LINK)],
+        [InlineKeyboardButton("📢 Join Channel 4", url=CH4_LINK)],
+        [InlineKeyboardButton("📢 Join Channel 5", url=CH5_LINK)],
         [InlineKeyboardButton("♻️ Try Again", callback_data="verify_join")],
     ])
     return text, markup
@@ -305,11 +326,11 @@ async def ip_lookup(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def maintenance(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "🛠️ Bot Under Maintenance\n\n"
-        "FREE All INFO NIKAL KE MISSUSE HO RAHA THA,:\n\n"
-        "AND BAHUT LOG INFO PE REPORT KAR RAHE THE...,:\n\n"
-        "SO, AB FREE INFO SIRF OWNER KE DM SE LELO"
-        "contact owner @ruchika_owns"
+        "🛠️ BOT UNDER MAINTENANCE\n\n"
+        "FREE All INFO NIKAL KE MISSUSE HO RAHA THA,\n\n"
+        "AND BAHUT LOG INFO PE REPORT KAR RAHE THE,\n\n"
+        "SO, AB FREE INFO SIRF OWNER KE DM SE LELO,\n\n"
+        "CONTACT OWNER @ruchika_owns"
     )
 
 def main():
