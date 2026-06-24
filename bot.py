@@ -58,7 +58,7 @@ def get_join_message(user_name):
         [InlineKeyboardButton("📢 Join Channel 3", url=CH3_LINK)],
         [InlineKeyboardButton("📢 Join Channel 4", url=CH4_LINK)],
         [InlineKeyboardButton("📢 Join Channel 5", url=CH5_LINK)],
-        [InlineKeyboardButton("📢 Join Channel 5", url=CH6_LINK)],
+        [InlineKeyboardButton("📢 Join Channel 6", url=CH6_LINK)],
         [InlineKeyboardButton("♻️ Try Again", callback_data="verify_join")],
     ])
     return text, markup
