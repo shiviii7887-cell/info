@@ -21,10 +21,6 @@ CH3_ID      = os.getenv("CH3_ID", "")
 CH3_LINK    = os.getenv("CH3_LINK", "")
 CH4_ID      = os.getenv("CH4_ID", "")
 CH4_LINK    = os.getenv("CH4_LINK", "")
-CH5_ID      = os.getenv("CH5_ID", "")
-CH5_LINK    = os.getenv("CH5_LINK", "")
-CH6_ID      = os.getenv("CH6_ID", "")
-CH6_LINK    = os.getenv("CH6_LINK", "")
 
 # ── Join Check ───────────────────────────────────────────────────────────────
 
@@ -37,12 +33,8 @@ async def is_user_joined(bot, user_id):
         mem3 = await bot.get_chat_member(CH3_ID, user_id)
         ch3 = mem3.status not in ['left', 'kicked']
         mem4 = await bot.get_chat_member(CH4_ID, user_id)
-        ch4 = mem4.status not in ['left', 'kicked']
-        mem5 = await bot.get_chat_member(CH5_ID, user_id)
-        ch5 = mem5.status not in ['left', 'kicked']
-        mem6 = await bot.get_chat_member(CH6_ID, user_id)
-        ch6 = mem6.status not in ['left', 'kicked']
-        return ch1 and ch2 and ch3 and ch4 and ch5 and ch6
+        ch4 = mem4.status not in ['left', 'kicked']        
+        return ch1 and ch2 and ch3 and ch4 
     except Exception as e:
         print(f"Join check error: {e}")
         return True
@@ -56,9 +48,7 @@ def get_join_message(user_name):
         [InlineKeyboardButton("📢 Join Channel 1", url=CH1_LINK)],
         [InlineKeyboardButton("📢 Join Channel 2", url=CH2_LINK)],
         [InlineKeyboardButton("📢 Join Channel 3", url=CH3_LINK)],
-        [InlineKeyboardButton("📢 Join Channel 4", url=CH4_LINK)],
-        [InlineKeyboardButton("📢 Join Channel 5", url=CH5_LINK)],
-        [InlineKeyboardButton("📢 Join Channel 6", url=CH6_LINK)],
+        [InlineKeyboardButton("📢 Join Channel 4", url=CH4_LINK)],        
         [InlineKeyboardButton("♻️ Try Again", callback_data="verify_join")],
     ])
     return text, markup
