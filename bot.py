@@ -118,8 +118,6 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 @require_join
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    @require_join
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🔥 *SANA x AYUSH INFO BOT*\n\n"
         "📱 Number Info: `/num 9876543210`\n"
