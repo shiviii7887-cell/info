@@ -118,26 +118,27 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 @require_join
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    @require_join
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "🔥 *LOOKUP INFO BOT*\n\n"
+        "🔥 *SANA x AYUSH INFO BOT*\n\n"
         "📱 Number Info: `/num 9876543210`\n"
         "📱 Number Info: `/Vnum 9876543210`\n"
         "📡 TG Info: `/tg 4589174428`\n"
         "🪪 Aadhaar Info: `/aadhar 54958327738`\n"
-        "📇 Pan Info: '/pan ABCDE1234F'\n"
-        "👨‍👩‍👧‍👦 Family Info: '/family 123456789012'\n"
-        "🏢 GST Info: '/gst 27ABCDE1234F1Z5'\n"
+        "📇 Pan Info: `/pan ABCDE1234F`\n"
+        "👨‍👩‍👧‍👦 Family Info: `/family 123456789012`\n"
+        "🏢 GST Info: `/gst 27ABCDE1234F1Z5`\n"
         "💳 UPI Info: `/upiinfo 9876543210@paytm`\n"
-        "📱 IMEI Info: '/imei 123456789012345'\n"
-        "👨‍👩‍👧 FAM Info: '/fam 9876543210'\n"
+        "📱 IMEI Info: `/imei 123456789012345`\n"
+        "👨‍👩‍👧 FAM Info: `/fam 9876543210`\n"
         "🚗 Vehicle RC: `/rc DL10CA7539`\n"
-        "📸 Instagram Info: '/insta username'\n"
-        "📧 Email Info: '/email example@gmail.com`\n"
+        "📸 Instagram Info: `/insta username`\n"
+        "📧 Email Info: `/email example@gmail.com`\n"
         "📮 Pincode Info: `/pin 110001`\n"
         "🏦 IFSC Info: `/ifsc SBIN0004843`\n"
         "🌐 IP Info: `/ip 8.8.8.8`\n"
-        "🇵🇰 Pakistan Info: '/pak 03123456789'\n\n"
-
+        "🇵🇰 Pakistan Info: `/pak 03123456789`\n\n"
         "⚠️ Some services are currently under maintenance.",
         parse_mode="Markdown"
     )
