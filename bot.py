@@ -35,7 +35,9 @@ CH8_LINK    = os.getenv("CH8_LINK", "")
 async def is_user_joined(bot, user_id):
     try:
         mem1 = await bot.get_chat_member(CH1_ID, user_id)
-        ch1 = mem1.status not in ['left', 'kicked']        
+        ch1 = mem1.status not in ['left', 'kicked']
+        mem2 = await bot.get_chat_member(CH2_ID, user_id)
+        ch2 = mem2.status not in ['left', 'kicked']
         mem3 = await bot.get_chat_member(CH3_ID, user_id)
         ch3 = mem3.status not in ['left', 'kicked']
         mem4 = await bot.get_chat_member(CH4_ID, user_id)
@@ -48,7 +50,7 @@ async def is_user_joined(bot, user_id):
         ch7 = mem7.status not in ['left', 'kicked'] 
         mem8 = await bot.get_chat_member(CH8_ID, user_id)
         ch8 = mem8.status not in ['left', 'kicked'] 
-        return ch1 and ch3 and ch4 and ch5 and ch6 and ch7 and ch8
+        return ch1 and ch2 and ch3 and ch4 and ch5 and ch6 and ch7 and ch8
     except Exception as e:
         print(f"Join check error: {e}")
         return True
@@ -60,7 +62,7 @@ def get_join_message(user_name):
     )
     markup = InlineKeyboardMarkup([
     [InlineKeyboardButton("📢 Join Channel 1", url=CH1_LINK)],
-    
+    [InlineKeyboardButton("📢 Join Channel 2", url=CH2_LINK)],
     [InlineKeyboardButton("📢 Join Channel 3", url=CH3_LINK)],
     [InlineKeyboardButton("📢 Join Channel 4", url=CH4_LINK)],
 
