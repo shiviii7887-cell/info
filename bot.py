@@ -9,10 +9,10 @@ from telegram.request import HTTPXRequest
 
 # ========== CONFIG ==========
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
-VEHICLE_API = "https://sbsakib.eu.cc/apis/vehicle_advance?key=Demo&rc="
-PINCODE_API = "https://sbsakib.eu.cc/apis/pincode_info?key=Demo&pincode="
-IFSC_API    = "https://sbsakib.eu.cc/apis/ifsc_info?key=Demo&ifsc="
-IP_API      = "https://sbsakib.eu.cc/apis/ip_info?key=Demo&ip="
+VEHICLE_API = ""
+PINCODE_API = ""
+IFSC_API    = ""
+IP_API      = ""
 CH1_ID      = os.getenv("CH1_ID", "")
 CH1_LINK    = os.getenv("CH1_LINK", "")
 CH2_ID      = os.getenv("CH2_ID", "")
@@ -129,7 +129,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 @require_join
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "🔥 *SANA x AYUSH INFO BOT*\n\n"
+        "🔥 *KIM x RITTU INFO BOT*\n\n"
         "📱 Number Info: `/num 9876543210`\n"
         "📱 Number Info: `/Vnum 9876543210`\n"
         "📡 TG Info: `/tg 4589174428`\n"
@@ -358,10 +358,8 @@ async def ip_lookup(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def maintenance(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "🛠️ BOT UNDER MAINTENANCE\n\n"
-        "FREE ME INFO NIKAL KE MISSUSE HO RAHA THA,\n\n"
-        "AND BAHUT LOG INFO PE REPORT KAR RAHE THE,\n\n"
-        "SO, AB FREE INFO SIRF OWNER KE DM SE LELO,\n\n"
+        "🛠️ BOT UNDER MAINTENANCE\n\n"        
+        "FREE INFO SIRF OWNER KE DM SE LELO,\n\n"
         "CONTACT OWNER @kimeunw00"
     )
 
